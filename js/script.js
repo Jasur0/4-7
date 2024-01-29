@@ -88,121 +88,163 @@ stopwatch__btn.addEventListener("click", function () {
 
 // calculator
 
-const result = document.querySelector(".result p");
+// const result = document.querySelector(".result p");
+// const numbers = document.querySelectorAll(".numbers");
+// const signs = document.querySelectorAll(".sign");
+// const equals = document.querySelector(".equals");
+// const clear = document.querySelector(".clear");
+// const negative = document.querySelector(".negative");
+// const percent = document.querySelector(".percent");
+
+// let firstValue = "";
+// let isFristValue = false;
+// let secondValue = "";
+// let isSecondValue = false;
+// let sign = "";
+// let resultValue = 0;
+
+// for (let i = 0; i < numbers.length; i++) {
+//   numbers[i].addEventListener("click", (e) => {
+//     let atr = e.target.getAttribute("value");
+//     if (isFristValue === false) {
+//       getFirstValue(atr);
+//     }
+//     if (isSecondValue == false) {
+//       getSecondValue(atr);
+//     }
+//   });
+// }
+
+// function getFirstValue(el) {
+//   result.innerHTML = "";
+//   firstValue += el;
+//   result.innerHTML = firstValue;
+//   firstValue = +firstValue;
+// }
+
+// function getSecondValue(el) {
+//   if (firstValue != "" && sign != "") {
+//     secondValue += el;
+//     result.innerHTML = secondValue;
+//     secondValue = +secondValue;
+//   }
+// }
+
+// function getSign() {
+//   for (let i = 0; i < signs.length; i++) {
+//     signs[i].addEventListener("click", (e) => {
+//       sign = e.target.getAttribute("value");
+//       isFristValue = true;
+//     });
+//   }
+// }
+
+// getSign();
+
+// equals.addEventListener("click", () => {
+//   result.innerHTML = "";
+
+//   if (sign === "+") {
+//     resultValue = firstValue + secondValue;
+//   } else if (sign === "-") {
+//     resultValue = firstValue - secondValue;
+//   } else if (sign === "*") {
+//     resultValue = firstValue * secondValue;
+//   } else if (sign === "/") {
+//     resultValue = firstValue / secondValue;
+//   }
+
+//   result.innerHTML = resultValue;
+//   firstValue = resultValue;
+//   secondValue = "";
+
+//   checkResultLength();
+// });
+
+// function checkResultLength() {
+//   resultValue = JSON.stringify(resultValue);
+
+//   if (resultValue.length >= 8) {
+//     resultValue = JSON.parse(resultValue);
+//     result.innerHTML = resultValue.toFixed(5);
+//   }
+// }
+
+// negative.addEventListener("click", () => {
+//   result.innerHTML = "";
+
+//   if (firstValue != "") {
+//     resultValue = -firstValue;
+//     firstValue = resultValue;
+//   }
+
+//   result.innerHTML = resultValue;
+// });
+
+// percent.addEventListener("click", () => {
+//   result.innerHTML = "";
+
+//   if (firstValue != "") {
+//     resultValue = firstValue / 100;
+//     firstValue = resultValue;
+//   }
+
+//   if (firstValue != "" && secondValue != "" && sign != "") {
+//     resultValue = resultValue / 100;
+//   }
+
+//   result.innerHTML = resultValue;
+// });
+
+// clear.addEventListener("click", () => {
+//   result.innerHTML = "";
+
+//   firstValue = "";
+//   isFristValue = false;
+//   secondValue = "";
+//   isSecondValue = false;
+//   sign = "";
+//   resultValue = 0;
+// });
+
 const numbers = document.querySelectorAll(".numbers");
-const signs = document.querySelectorAll(".sign");
-const equals = document.querySelector(".equals");
-const clear = document.querySelector(".clear");
+const results = document.querySelector(".calc__screen-out");
 const negative = document.querySelector(".negative");
-const percent = document.querySelector(".percent");
+const sign = document.querySelector(".sign");
 
-let firstValue = "";
-let isFristValue = false;
-let secondValue = "";
-let isSecondValue = false;
-let sign = "";
-let resultValue = 0;
+let result = "";
+let arr = Array.from(numbers);
 
-for (let i = 0; i < numbers.length; i++) {
-  numbers[i].addEventListener("click", (e) => {
-    let atr = e.target.getAttribute("value");
-    if (isFristValue === false) {
-      getFirstValue(atr);
-    }
-    if (isSecondValue == false) {
-      getSecondValue(atr);
+function teng() {
+  if (results.innerHTML == "") {
+    results.innerHTML = "0";
+  }
+}
+
+arr.forEach((a) => {
+  a.addEventListener("click", (e) => {
+    if (e.target.innerHTML == "=") {
+      result = eval(result);
+      results.innerHTML = result;
+    } else if (e.target.innerHTML == "ac") {
+      result = "";
+      results.innerHTML = result;
+      teng()
+    } else if (e.target.innerHTML == "ce") {
+      result = result.substring(0, result.length - 1);
+      results.innerHTML = result;
+      teng()
+    } else {
+      result += e.target.innerHTML;
+      results.innerHTML = result;
     }
   });
-}
-
-function getFirstValue(el) {
-  result.innerHTML = "";
-  firstValue += el;
-  result.innerHTML = firstValue;
-  firstValue = +firstValue;
-}
-
-function getSecondValue(el) {
-  if (firstValue != "" && sign != "") {
-    secondValue += el;
-    result.innerHTML = secondValue;
-    secondValue = +secondValue;
-  }
-}
-
-function getSign() {
-  for (let i = 0; i < signs.length; i++) {
-    signs[i].addEventListener("click", (e) => {
-      sign = e.target.getAttribute("value");
-      isFristValue = true;
-    });
-  }
-}
-
-getSign();
-
-equals.addEventListener("click", () => {
-  result.innerHTML = "";
-
-  if (sign === "+") {
-    resultValue = firstValue + secondValue;
-  } else if (sign === "-") {
-    resultValue = firstValue - secondValue;
-  } else if (sign === "*") {
-    resultValue = firstValue * secondValue;
-  } else if (sign === "/") {
-    resultValue = firstValue / secondValue;
-  }
-
-  result.innerHTML = resultValue;
-  firstValue = resultValue;
-  secondValue = "";
-
-  checkResultLength();
 });
-
-function checkResultLength() {
-  resultValue = JSON.stringify(resultValue);
-
-  if (resultValue.length >= 8) {
-    resultValue = JSON.parse(resultValue);
-    result.innerHTML = resultValue.toFixed(5);
-  }
-}
-
 negative.addEventListener("click", () => {
-  result.innerHTML = "";
-
-  if (firstValue != "") {
-    resultValue = -firstValue;
-    firstValue = resultValue;
-  }
-
-  result.innerHTML = resultValue;
+  results.innerHTML = -results.innerHTML;
+  result = results.innerHTML
 });
-
-percent.addEventListener("click", () => {
-  result.innerHTML = "";
-
-  if (firstValue != "") {
-    resultValue = firstValue / 100;
-    firstValue = resultValue;
-  }
-
-  if (firstValue != "" && secondValue != "" && sign != "") {
-    resultValue = resultValue / 100;
-  }
-
-  result.innerHTML = resultValue;
-});
-
-clear.addEventListener("click", () => {
-  result.innerHTML = "";
-
-  firstValue = "";
-  isFristValue = false;
-  secondValue = "";
-  isSecondValue = false;
-  sign = "";
-  resultValue = 0;
-});
+sign.addEventListener("click", () => {
+  results.innerHTML = results.innerHTML / 100;
+  result = results.innerHTML
+})
